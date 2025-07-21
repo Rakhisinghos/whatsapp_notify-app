@@ -1,43 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Scholarship Notification</title>
+    <title>Send WhatsApp Message</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h2>Send Scholarship Notification</h2>
+        <h2>Student WhatsApp Notifier</h2>
         <form method="POST">
-            <div id="form-section">
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="Enter Student Name" required>
-                    <input type="text" name="phone" placeholder="Enter Phone Number" required>
-                    <button type="button" class="remove-btn" onclick="removeField(this)">×</button>
-                </div>
-            </div>
-            <button type="button" class="add-btn" onclick="addField()">+ Add More</button>
-            <br><br>
-            <button type="submit" class="submit-btn">Send Messages</button>
+            <label>Student Name:</label>
+            <input type="text" name="name" required placeholder="Enter student name">
+
+            <label>Phone Number:</label>
+            <input type="tel" name="phone" required placeholder="e.g. 9876543210">
+
+            <button type="submit">Send WhatsApp Message</button>
         </form>
     </div>
-
-    <script>
-        function addField() {
-            const container = document.getElementById('form-section');
-            const div = document.createElement('div');
-            div.className = 'form-group';
-            div.innerHTML = `
-                <input type="text" name="name" placeholder="Enter Student Name" required>
-                <input type="text" name="phone" placeholder="Enter Phone Number" required>
-                <button type="button" class="remove-btn" onclick="removeField(this)">×</button>
-            `;
-            container.appendChild(div);
-        }
-
-        function removeField(button) {
-            button.parentElement.remove();
-        }
-    </script>
 </body>
 </html>
