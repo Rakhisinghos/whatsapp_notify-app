@@ -1,69 +1,71 @@
-/* Reset some default styles */
-body, h1, h2, p, ul {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
 body {
-  background: linear-gradient(to right, #e0f7fa, #ffffff);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.container {
-  background-color: #ffffff;
-  padding: 30px 40px;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  width: 100%;
-  max-width: 400px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom right, #e3f2fd, #ffffff);
+  margin: 0;
+  padding: 40px;
+  color: #333;
 }
 
 h2 {
   text-align: center;
-  color: #00796b;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
+  color: #0d47a1;
 }
 
-label {
-  display: block;
-  margin-bottom: 8px;
-  color: #333;
-  font-weight: 500;
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-input[type="text"],
-input[type="tel"] {
-  width: 100%;
-  padding: 10px 12px;
-  margin-bottom: 20px;
+.field-pair {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.field-pair input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  margin-right: 10px;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 16px;
-  transition: border 0.3s ease;
+  border-radius: 6px;
+  font-size: 15px;
 }
 
-input[type="text"]:focus,
-input[type="tel"]:focus {
-  border-color: #00796b;
-  outline: none;
-}
-
-button {
-  width: 100%;
-  padding: 12px;
-  background-color: #00796b;
+.field-pair button {
+  background-color: #e53935;
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
+  padding: 8px 12px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 14px;
+}
+
+button[type="button"] {
+  background-color: #00796b;
+  margin-top: 10px;
+}
+
+button[type="submit"] {
+  background-color: #1976d2;
+  display: block;
+  width: 100%;
+  margin-top: 25px;
 }
 
 button:hover {
-  background-color: #004d40;
+  opacity: 0.9;
+}
+
+a {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #1976d2;
 }
