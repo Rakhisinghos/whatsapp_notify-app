@@ -29,7 +29,7 @@ Chhattisgarh Institute of Technology (CGIT), Jagdalpur"""
             whatsapp_url = f"https://wa.me/{phone}?text={encoded_msg}"
             links.append(whatsapp_url)
 
-        return render_template('results.html', links=links)
+        return render_template('result.html', links=links)
 
     return render_template('index.html')
 
