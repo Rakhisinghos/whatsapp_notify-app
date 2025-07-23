@@ -6,8 +6,8 @@ import os
 app = Flask(__name__)
 app.secret_key = "email_sender_secret"
 
-EMAIL_ADDRESS = "your_email@example.com"
-EMAIL_PASSWORD = "your_app_password"
+EMAIL_ADDRESS = "rakhisinghos2003@gmail.com"
+EMAIL_PASSWORD = "nrrk tofd jxpx gyeg"
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -20,7 +20,7 @@ def index():
         try:
             for name, email in zip(names, emails):
                 msg = EmailMessage()
-                msg['Subject'] = 'Scholarship Notification from CGIT Student Section'
+                msg['Subject'] = 'Pending Fees Notification from CGIT Student Section'
                 msg['From'] = EMAIL_ADDRESS
                 msg['To'] = email
 
