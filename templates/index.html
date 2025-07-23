@@ -1,21 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Send WhatsApp Message</title>
+    <title>Email Sender</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h2>Student WhatsApp Notifier</h2>
-        <form method="POST">
-            <label>Student Name:</label>
-            <input type="text" name="name" required placeholder="Enter student name">
+        <h1>Fees Email Notifier</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <form method="post">
+            <div id="recipients">
+                <div class="entry">
+                    <input type="text" name="name" placeholder="Student Name" required>
+                    <input type="email" name="email" placeholder="Email Address" required>
+                </div>
+            </div>
+            <button type="button" onclick="addRecipient()">Add More</button><br><br>
 
-            <label>Phone Number:</label>
-            <input type="tel" name="phone" required placeholder="e.g. 9876543210">
+            <textarea name="message" rows="7" required>Dear [Name],
+Your scholarship has arrived. Please report to the Student Section as soon as possible and pay your remaining fees. 
+Otherwise, a penalty will be levied.
 
-            <button type="submit">Send WhatsApp Message</button>
+From:
+Student Section
+Chhattisgarh Institute of Technology (CGIT), Jagdalpur, Chhattisgarh</textarea><br>
+
+            <button type="submit">Send Emails</button>
         </form>
     </div>
+<script>
+    function addRecipient() {
+        const container = document.getElementById("recipients");
+        const div = document.createElement("div");
+        div.classList.add("entry");
+        div.innerHTML = '<input type="text" name="name" placeholder="Student Name" required> <input type="email" name="email" placeholder="Email Address" required>';
+        container.appendChild(div);
+    }
+</script>
 </body>
 </html>
