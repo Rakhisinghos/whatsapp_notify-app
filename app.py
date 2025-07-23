@@ -1,38 +1,44 @@
-from flask import Flask, render_template, request
-import urllib.parse
+from flask import Flask, render_template, request, redirect, flash
+import smtplib
+from email.message import EmailMessage
 import os
 
 app = Flask(__name__)
+app.secret_key = "email_sender_secret"
+
+EMAIL_ADDRESS = "your_email@example.com"
+EMAIL_PASSWORD = "your_app_password"
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         names = request.form.getlist('name')
-        phones = request.form.getlist('phone')
+        emails = request.form.getlist('email')
 
-        # Create WhatsApp URLs for each contact
-        links = []
-        for name, phone in zip(names, phones):
-            phone = phone.strip().replace(" ", "")
-            if not phone.startswith('91'):
-                phone = '91' + phone  # Add country code for India
+        message_body = request.form.get('message')
 
-            message = f"""Dear {name},
-Your scholarship has arrived. Please report to the Student Section as soon as possible and pay your remaining fees. 
-Otherwise, a penalty will be levied.
+        try:
+            for name, email in zip(names, emails):
+                msg = EmailMessage()
+                msg['Subject'] = 'Scholarship Notification from CGIT Student Section'
+                msg['From'] = EMAIL_ADDRESS
+                msg['To'] = email
 
-From:
-Student Section
-Chhattisgarh Institute of Technology (CGIT), Jagdalpur"""
+                # Personalize message
+                body = message_body.replace("[Name]", name)
+                msg.set_content(body)
 
-            encoded_msg = urllib.parse.quote(message)
-            whatsapp_url = f"https://wa.me/{phone}?text={encoded_msg}"
-            links.append(whatsapp_url)
+                with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                    smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+                    smtp.send_message(msg)
 
-        return render_template('result.html', links=links)
+            flash("Emails sent successfully!", "success")
+        except Exception as e:
+            flash(f"An error occurred: {e}", "danger")
+
+        return redirect('/')
 
     return render_template('index.html')
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(debug=True, port=5000)

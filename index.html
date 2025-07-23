@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Sender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Scholarship Email Notification</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <form method="post">
+            <div id="recipients">
+                <div class="entry">
+                    <input type="text" name="name" placeholder="Student Name" required>
+                    <input type="email" name="email" placeholder="Email Address" required>
+                </div>
+            </div>
+            <button type="button" onclick="addRecipient()">Add More</button><br><br>
+
+            <textarea name="message" rows="7" required>Dear [Name],
+Your scholarship has arrived. Please report to the Student Section as soon as possible and pay your remaining fees. 
+Otherwise, a penalty will be levied.
+
+From:
+Student Section
+Chhattisgarh Institute of Technology (CGIT), Jagdalpur</textarea><br>
+
+            <button type="submit">Send Emails</button>
+        </form>
+    </div>
+<script>
+    function addRecipient() {
+        const container = document.getElementById("recipients");
+        const div = document.createElement("div");
+        div.classList.add("entry");
+        div.innerHTML = '<input type="text" name="name" placeholder="Student Name" required> <input type="email" name="email" placeholder="Email Address" required>';
+        container.appendChild(div);
+    }
+</script>
+</body>
+</html>
